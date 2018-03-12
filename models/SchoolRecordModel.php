@@ -13,12 +13,12 @@ use sp_framework\constants\SpErrorCodeConst;
 
 class SchoolRecordModel
 {
-    const TABLE_NAME = "question_detail";
+    const TABLE_NAME = "school_record";
     private static $db_school;
 
     public static function getDB(){
         if(is_null(self::$db_school)){
-            self::$db_school = \Yii::$app->db_school;
+            self::$db_school = \Yii::$app->db_school_admin;
         }
         return self::$db_school;
     }
