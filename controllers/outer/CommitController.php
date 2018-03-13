@@ -13,7 +13,8 @@ class CommitController extends Controller
 {
     public function actions(){
         return [
-            "addSchool"  => 'app\modules\actions\outer\commit\AddSchoolAction',
+            "addSchool" => 'app\modules\actions\outer\commit\AddSchoolAction',
+            "addClass"  => 'app\modules\actions\outer\commit\AddClassAction',
         ];
     }
 }

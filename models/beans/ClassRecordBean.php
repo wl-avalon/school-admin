@@ -18,7 +18,8 @@ class ClassRecordBean
 {
     private $id                 = null; //BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '主键,自增ID'
     private $uuid               = null; //VARCHAR(100) DEFAULT '' COMMENT '班级唯一ID'
-    private $school_id          = null; //VARCHAR(200) DEFAULT '' COMMENT '所属学校ID'
+    private $school_uuid        = null; //VARCHAR(200) DEFAULT '' COMMENT '所属学校ID'
+    private $class_name         = null; //VARCHAR(10) DEFAULT '' COMMENT '班级名称',
     private $class_create_grade = null; //VARCHAR(10) DEFAULT '' COMMENT '班级建立时年级'
     private $class_create_date  = null; //TIMESTAMP DEFAULT '0000-00-00 00:00:00' COMMENT '班级建立时间'
     private $class_grade        = null; //VARCHAR(10) DEFAULT '' COMMENT '班级当前年级'
@@ -31,7 +32,8 @@ class ClassRecordBean
     public function __construct($input){
         $this->id                   = $input['id']                  ?? null;
         $this->uuid                 = $input['uuid']                ?? null;
-        $this->school_id            = $input['school_id']           ?? null;
+        $this->school_uuid          = $input['school_uuid']         ?? null;
+        $this->class_name           = $input['class_name']          ?? null;
         $this->class_create_grade   = $input['class_create_grade']  ?? null;
         $this->class_create_date    = $input['class_create_date']   ?? null;
         $this->class_grade          = $input['class_grade']         ?? null;
@@ -46,7 +48,8 @@ class ClassRecordBean
         return [
             'id'                    => $this->id,
             'uuid'                  => $this->uuid,
-            'school_id'             => $this->school_id,
+            'school_uuid'           => $this->school_uuid,
+            'class_name'            => $this->class_name,
             'class_create_grade'    => $this->class_create_grade,
             'class_create_date'     => $this->class_create_date,
             'class_grade'           => $this->class_grade,
@@ -60,7 +63,8 @@ class ClassRecordBean
     
     public function getID()                 {return $this->id;}
     public function getUuid()               {return $this->uuid;}
-    public function getSchoolID()           {return $this->school_id;}
+    public function getSchoolUuid()         {return $this->school_uuid;}
+    public function getClassName()          {return $this->class_name;}
     public function getClassCreateGrade()   {return $this->class_create_grade;}
     public function getClassCreateDate()    {return $this->class_create_date;}
     public function getClassGrade()         {return $this->class_grade;}
@@ -72,7 +76,8 @@ class ClassRecordBean
     
     public function setID($id)                                  {$this->id                  = $id;}
     public function setUuid($uuid)                              {$this->uuid                = $uuid;}
-    public function setSchoolID($school_id)                     {$this->school_id           = $school_id;}
+    public function setSchoolUuid($school_uuid)                 {$this->school_uuid         = $school_uuid;}
+    public function setClassName($class_name)                   {$this->class_name          = $class_name;}
     public function setClassCreateGrade($class_create_grade)    {$this->class_create_grade  = $class_create_grade;}
     public function setClassCreateDate($class_create_date)      {$this->class_create_date   = $class_create_date;}
     public function setClassGrade($class_grade)                 {$this->class_grade         = $class_grade;}
