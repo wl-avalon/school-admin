@@ -20,7 +20,7 @@ class AddSchoolService
         Assert::isTrue(!empty($idResponse['data']['nextId']), "网络繁忙,请稍后再试", "获取schoolUuid失败");
         $schoolUuid = $idResponse['data']['nextId'];
         $schoolRecordBeanData = [
-            'school_uuid'           => $schoolUuid,
+            'uuid'           => $schoolUuid,
             'school_name'           => $schoolName,
             'school_level'          => $schoolLevel,
             'school_attribution'    => $schoolAttribution,
