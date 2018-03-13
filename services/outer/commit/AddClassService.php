@@ -17,7 +17,7 @@ class AddClassService
 {
     public static function addClass($schoolUuid, $className, $nowGrade, $createTime, $graduateTime){
         $idResponse = IDAllocApi::nextId();
-        Assert::isTrue(!empty($idResponse['data']['nextId']), "网络繁忙,请稍后再试", "获取schoolUuid失败");
+        Assert::isTrue(!empty($idResponse['data']['nextId']), "网络繁忙,请稍后再试", "获取classUuid失败");
         $classUuid = $idResponse['data']['nextId'];
 
         $classRecordBeanData = [
