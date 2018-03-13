@@ -21,6 +21,7 @@ class AddSchoolService
         $schoolUuid = $idResponse['data']['nextId'];
         $schoolRecordBeanData = [
             'school_uuid'           => $schoolUuid,
+            'school_name'           => $schoolName,
             'school_level'          => $schoolLevel,
             'school_attribution'    => $schoolAttribution,
             'school_status'         => SchoolRecordBeanConst::SCHOOL_STATUS_NORMAL,
