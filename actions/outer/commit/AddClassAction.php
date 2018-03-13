@@ -9,6 +9,7 @@
 namespace app\modules\actions\outer\commit;
 use app\modules\services\outer\commit\AddClassService;
 use sp_framework\actions\BaseAction;
+use sp_framework\components\Assert;
 
 class AddClassAction extends BaseAction
 {
@@ -25,10 +26,16 @@ class AddClassAction extends BaseAction
         $this->nowGrade     = $this->get('nowGrade');
         $this->createTime   = $this->get('createTime');
         $this->graduateTime = $this->get('graduateTime');
+        Assert::isTrue(!empty($this->schoolUuid), "学校ID不能为空");
+        Assert::isTrue(!empty($this->className), "班级名称不能为空");
+        Assert::isTrue(!empty($this->nowGrade), "班级创建年级不能为空");
+        Assert::isTrue(!empty($this->createTime), "班级创建时间不能为空");
+        Assert::isTrue(!empty($this->graduateTime), "毕业时间不能为空");
     }
 
     public function execute()
     {
-        AddClassService::addClass($this->schoolUuid, $this->className, $this->nowGrade, $this->createTime, $this->graduateTime);
+        $addResult = AddClassService::addClass($this->schoolUuid, $this->className, $this->nowGrade, $this->createTime, $this->graduateTime);
+        return $addResult;
     }
 }
