@@ -16,26 +16,21 @@ class AddClassAction extends BaseAction
     private $schoolUuid;
     private $className;
     private $nowGrade;
-    private $createTime;
-    private $graduateTime;
 
     protected function formatParams()
     {
-        $this->schoolUuid   = $this->get('schoolUuid');
+        $this->schoolUuid   = $this->get('schoolUuid', '839816122361442312');
         $this->className    = $this->get('className');
         $this->nowGrade     = $this->get('nowGrade');
-        $this->createTime   = $this->get('createTime');
-        $this->graduateTime = $this->get('graduateTime');
         Assert::isTrue(!empty($this->schoolUuid), "学校ID不能为空");
         Assert::isTrue(!empty($this->className), "班级名称不能为空");
-        Assert::isTrue(!empty($this->nowGrade), "班级创建年级不能为空");
-        Assert::isTrue(!empty($this->createTime), "班级创建时间不能为空");
-        Assert::isTrue(!empty($this->graduateTime), "毕业时间不能为空");
+        Assert::isTrue(!empty($this->nowGrade), "班级当前年级不能为空");
+        Assert::isTrue(in_array($this->nowGrade, [15,16,17]), "暂不支持该年级");
     }
 
     public function execute()
     {
-        $addResult = AddClassService::addClass($this->schoolUuid, $this->className, $this->nowGrade, $this->createTime, $this->graduateTime);
+        $addResult = AddClassService::addClass($this->schoolUuid, $this->className, $this->nowGrade);
         return $addResult;
     }
 }
