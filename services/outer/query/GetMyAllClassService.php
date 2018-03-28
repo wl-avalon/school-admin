@@ -26,6 +26,8 @@ class GetMyAllClassService
                 'className'     => $classRecordBean->getClassName(),
             ];
         }
-        return $result;
+        return [
+            'classList' => $result,
+        ];
     }
 }
