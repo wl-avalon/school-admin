@@ -7,8 +7,6 @@
  */
 
 namespace app\modules\models;
-
-
 use app\modules\models\beans\ClassStudentRelationBean;
 use sp_framework\components\SpException;
 use sp_framework\constants\SpErrorCodeConst;
@@ -66,7 +64,7 @@ class ClassStudentRelationModel
         try{
             $rowNum = self::getDb()->createCommand()->batchInsert(self::TABLE_NAME, $columnKey, $insertDataList)->execute();
         }catch(\Exception $e){
-            throw new SpException(SpErrorCodeConst::INSERT_DB_ERROR, "insert db error, message is:" . $e->getMessage(), "插入数据库失败");
+            throw new SpException(SpErrorCodeConst::INSERT_DB_ERROR, "insert db error, message is:" . $e->getMessage(), "网络繁忙,请稍后再试");
         }
         return $rowNum;
     }
@@ -84,7 +82,7 @@ class ClassStudentRelationModel
         try{
             $aData = (new Query())->select([])->where($aWhere)->from(self::TABLE_NAME)->createCommand(self::getDB())->queryAll();
         }catch(\Exception $e){
-            throw new \Exception('select db error,message is:' . $e->getMessage(), "网络繁忙,请稍后再试");
+            throw new SpException(SpErrorCodeConst::INSERT_DB_ERROR, 'select db error,message is:' . $e->getMessage(), "网络繁忙,请稍后再试");
         }
         return self::convertDbToBeans($aData);
     }
