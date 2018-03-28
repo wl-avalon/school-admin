@@ -14,6 +14,7 @@ use sp_framework\components\Assert;
 class AddClassAction extends BaseAction
 {
     private $schoolUuid;
+    private $classMaster;
     private $className;
     private $nowGrade;
 
@@ -22,6 +23,7 @@ class AddClassAction extends BaseAction
         $this->schoolUuid   = $this->get('schoolUuid', '839816122361442312');
         $this->className    = $this->get('className');
         $this->nowGrade     = $this->get('nowGrade');
+        $this->classMaster  = $this->get('memberID');
         Assert::isTrue(!empty($this->schoolUuid), "学校ID不能为空");
         Assert::isTrue(!empty($this->className), "班级名称不能为空");
         Assert::isTrue(!empty($this->nowGrade), "班级当前年级不能为空");
@@ -30,7 +32,7 @@ class AddClassAction extends BaseAction
 
     public function execute()
     {
-        $addResult = AddClassService::addClass($this->schoolUuid, $this->className, $this->nowGrade);
+        $addResult = AddClassService::addClass($this->schoolUuid, $this->className, $this->nowGrade, $this->classMaster);
         return $addResult;
     }
 }

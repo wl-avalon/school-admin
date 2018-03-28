@@ -15,7 +15,7 @@ use sp_framework\components\Assert;
 
 class AddClassService
 {
-    public static function addClass($schoolUuid, $className, $nowGrade){
+    public static function addClass($schoolUuid, $className, $nowGrade, $classMaster){
         $idResponse = IDAllocApi::nextId();
         Assert::isTrue(!empty($idResponse['data']['nextId']), "网络繁忙,请稍后再试", "获取classUuid失败");
         $classUuid  = $idResponse['data']['nextId'];
@@ -34,6 +34,7 @@ class AddClassService
             'class_create_time'     => date('Y-09-01 00:00:00', strtotime("-{$classYearsOld} year")),
             'graduate_time'         => date('Y-06-01 00:00:00', strtotime("+{$waitGraduateYears} year")),
             'class_status'          => ClassRecordBeanConst::CLASS_STATUS_NORMAL,
+            'class_master'          => $classMaster,
             'create_time'           => date('Y-m-d H:i:s'),
         ];
         $classRecordBean = new ClassRecordBean($classRecordBeanData);
