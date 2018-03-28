@@ -36,4 +36,24 @@ class ClassRecordBeanConst
     const GRADE_HIGH_SCHOOL_FIRST       = 15;   //高一
     const GRADE_HIGH_SCHOOL_SECOND      = 16;   //高二
     const GRADE_HIGH_SCHOOL_THIRD       = 17;   //高三
+
+    public static $gradeMap = [
+        1   => '幼儿园小班',
+        2   => '幼儿园中班',
+        3   => '幼儿园大班',
+        4   => '小学一年级',
+        5   => '小学二年级',
+        6   => '小学三年级',
+        7   => '小学四年级',
+        8   => '小学五年级',
+        9   => '小学六年级',
+        10  => '小学七年级',
+        11  => '初一',
+        12  => '初二',
+        13  => '初三',
+        14  => '初四',
+        15  => '高一',
+        16  => '高二',
+        17  => '高三',
+    ];
 }

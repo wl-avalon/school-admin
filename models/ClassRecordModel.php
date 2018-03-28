@@ -7,9 +7,11 @@
  */
 
 namespace app\modules\models;
+use app\modules\constants\ClassRecordBeanConst;
 use app\modules\models\beans\ClassRecordBean;
 use sp_framework\components\SpException;
 use sp_framework\constants\SpErrorCodeConst;
+use yii\db\Query;
 
 class ClassRecordModel
 {
@@ -43,5 +45,24 @@ class ClassRecordModel
             throw new SpException(SpErrorCodeConst::INSERT_DB_ERROR, "insert db error, message is:" . $e->getMessage(), "网络繁忙,请稍后再试");
         }
         return $rowNum;
+    }
+
+    /**
+     * @param $classMaster
+     * @return ClassRecordBean[]
+     * @throws \Exception
+     */
+    public static function queryAllClassByClassMaster($classMaster){
+        $aWhere = [
+            'class_master'  => $classMaster,
+            'class_status'  => ClassRecordBeanConst::CLASS_STATUS_NORMAL,
+        ];
+
+        try{
+            $aData = (new Query())->select([])->where($aWhere)->from(self::TABLE_NAME)->createCommand(self::getDB())->queryAll();
+        }catch(\Exception $e){
+            throw new \Exception('select db error,message is:' . $e->getMessage(), "网络繁忙,请稍后再试");
+        }
+        return self::convertDbToBeans($aData);
     }
 }
