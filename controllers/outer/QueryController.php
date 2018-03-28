@@ -13,7 +13,8 @@ class QueryController extends Controller
 {
     public function actions(){
         return [
-            "getMyAllClass"  => 'app\modules\actions\outer\query\GetMyAllClassAction',
+            'getMyAllClass'     => 'app\modules\actions\outer\query\GetMyAllClassAction',
+            'getStudentOfClass' => 'app\modules\actions\outer\query\GetStudentOfClassAction',
         ];
     }
 }

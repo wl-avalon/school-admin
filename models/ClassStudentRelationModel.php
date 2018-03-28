@@ -12,6 +12,7 @@ namespace app\modules\models;
 use app\modules\models\beans\ClassStudentRelationBean;
 use sp_framework\components\SpException;
 use sp_framework\constants\SpErrorCodeConst;
+use yii\db\Query;
 
 class ClassStudentRelationModel
 {
@@ -68,5 +69,23 @@ class ClassStudentRelationModel
             throw new SpException(SpErrorCodeConst::INSERT_DB_ERROR, "insert db error, message is:" . $e->getMessage(), "插入数据库失败");
         }
         return $rowNum;
+    }
+
+    /**
+     * @param $classUuid
+     * @return ClassStudentRelationBean[]
+     * @throws \Exception
+     */
+    public static function queryAllClassByClassMaster($classUuid){
+        $aWhere = [
+            'class_uuid'    => $classUuid,
+        ];
+
+        try{
+            $aData = (new Query())->select([])->where($aWhere)->from(self::TABLE_NAME)->createCommand(self::getDB())->queryAll();
+        }catch(\Exception $e){
+            throw new \Exception('select db error,message is:' . $e->getMessage(), "网络繁忙,请稍后再试");
+        }
+        return self::convertDbToBeans($aData);
     }
 }
