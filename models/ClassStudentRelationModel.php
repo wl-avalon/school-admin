@@ -14,7 +14,7 @@ use yii\db\Query;
 
 class ClassStudentRelationModel
 {
-    const TABLE_NAME = "homework_item";
+    const TABLE_NAME = "class_student_relation";
     private static $db_school;
 
     public static function getDB(){
