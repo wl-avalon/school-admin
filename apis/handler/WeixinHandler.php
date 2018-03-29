@@ -14,13 +14,15 @@ use sp_framework\constants\SpErrorCodeConst;
 class WeixinHandler extends DefaultHandler
 {
     public function getParams() {
-        $params = [
-            'appid'         => $this->params['appid'],
-            'secret'        => $this->params['secret'],
-            'js_code'       => $this->params['js_code'],
-            'grant_type'    => $this->params['grant_type'],
-        ];
-        return $params;
+        return $this->params;
+    }
+
+    public function getUrl()
+    {
+        $url = parent::getUrl();
+        $url .= 'access_token=' . $this->params['access_token'];
+        unset($this->params['access_token']);
+        return $url;
     }
 
     public function handleResponse(Response &$response, array $arrJson){

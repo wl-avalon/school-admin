@@ -15,4 +15,10 @@ return [
         'timeout'       => 10000,
         'conntimeout'   => 5000,
     ],
+    'weixin'   => [
+        'domain'    => 'https://api.weixin.qq.com',
+        'apis' => [
+            'createCodeUnLimit' => '/wxa/getwxacodeunlimit',
+        ],
+    ],
 ];
