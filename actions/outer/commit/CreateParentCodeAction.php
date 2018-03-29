@@ -7,6 +7,7 @@
  */
 
 namespace app\modules\actions\outer\commit;
+use app\modules\services\outer\commit\CreateParentCodeService;
 use sp_framework\actions\BaseAction;
 use sp_framework\components\Assert;
 
@@ -18,13 +19,13 @@ class CreateParentCodeAction extends BaseAction
     protected function formatParams()
     {
         $this->classUuid    = $this->get('classUuid');
-        $this->classMaster  = $this->get('memberID');
+//        $this->classMaster  = $this->get('memberID');
         Assert::isTrue(!empty($this->classUuid), "网络繁忙,请稍后再试", "班级不能为空");
-        Assert::isTrue(!empty($this->classMaster), "网络繁忙,请稍后再试", "班主任不能为空");
+//        Assert::isTrue(!empty($this->classMaster), "网络繁忙,请稍后再试", "班主任不能为空");
     }
 
     public function execute()
     {
-
+        return CreateParentCodeService::createParentCode($this->classUuid);
     }
 }
