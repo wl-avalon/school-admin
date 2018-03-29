@@ -14,22 +14,23 @@ use sp_framework\constants\SpErrorCodeConst;
 class WeixinHandler extends DefaultHandler
 {
     public function getParams() {
-        return $this->params;
+        return json_encode($this->params);
     }
 
     public function getUrl()
     {
         $url = parent::getUrl();
-        $url .= 'access_token=' . $this->params['access_token'];
+        $url .= '?access_token=' . $this->params['access_token'];
         unset($this->params['access_token']);
         return $url;
     }
 
     public function handleResponse(Response &$response, array $arrJson){
-        if(isset($arrJson['errcode'])){
-            $response->setReturnCode($arrJson['errcode']);
-            $response->setReturnUserMessage($arrJson['errmsg']);
-            $response->setReturnMessage($arrJson['errmsg']);
+        $decode = json_decode($arrJson, true);
+        if(isset($decode['errcode'])){
+            $response->setReturnCode($decode['errcode']);
+            $response->setReturnUserMessage($decode['errmsg']);
+            $response->setReturnMessage($decode['errmsg']);
         }else{
             $response->setReturnCode(SpErrorCodeConst::SUCCESSFUL);
             $response->setReturnUserMessage("");
@@ -37,5 +38,11 @@ class WeixinHandler extends DefaultHandler
             $response->setData($arrJson);
         }
         return $response;
+    }
+
+    public function getDeserializer(){
+        return static function($data){
+            return $data;
+        };
     }
 }

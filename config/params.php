@@ -19,6 +19,8 @@ return [
         'domain'    => 'https://api.weixin.qq.com',
         'apis' => [
             'createCodeUnLimit' => '/wxa/getwxacodeunlimit',
+            'createWxACode'     => '/wxa/getwxacode',
+            'createWxAQrCode'   => '/wxaapp/createwxaqrcode',
         ],
     ],
 ];

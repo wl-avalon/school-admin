@@ -18,7 +18,7 @@ class CreateParentCodeService
     public static function createParentCode($classUuid){
         $redis          = RedisUtil::getInstance('redis');
         $accessToken    = $redis->get(RedisKey::WEI_XIN_ACCESS_TOKEN);
-        $response       = WeiXinApi::createCodeUnLimit('page/mine/mine', ['classUuid' => $classUuid], $accessToken)->toArray();
+        $response       = WeiXinApi::createWxACode('page/mine/mine', $accessToken)->toArray();
         return $response;
     }
 }
