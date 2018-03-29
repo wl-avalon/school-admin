@@ -9,9 +9,15 @@
 namespace app\modules\services\outer\commit;
 
 
+use app\modules\apis\WeiXinApi;
+use app\modules\constants\RedisKey;
+use sp_framework\util\RedisUtil;
+
 class CreateParentCodeService
 {
     public static function createParentCode($classUuid){
-
+        $redis          = RedisUtil::getInstance('redis');
+        $accessToken    = $redis->get(RedisKey::WEI_XIN_ACCESS_TOKEN);
+        $response       = WeiXinApi::createCodeUnLimit('page/mine/mine', ['classUuid' => $classUuid], $accessToken)->toArray();
     }
 }

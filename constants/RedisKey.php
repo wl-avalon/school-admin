@@ -11,5 +11,5 @@ namespace app\modules\constants;
 
 class RedisKey
 {
-    const SELF_PROXY_IP_LIST = 'self_proxy_ip_list';
+    const WEI_XIN_ACCESS_TOKEN          = 'wei_xin_access_token';
 }
