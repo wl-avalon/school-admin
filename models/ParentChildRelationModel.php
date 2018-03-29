@@ -96,4 +96,24 @@ class ParentChildRelationModel
         }
         return self::convertDbToBean($aData);
     }
+
+    /**
+     * @param $parentUuid
+     * @param $childUuid
+     * @return ParentChildRelationBean
+     * @throws SpException
+     */
+    public static function queryParentByChildAndRelation($parentUuid, $childUuid){
+        $aWhere = [
+            'parent_uuid'   => $parentUuid,
+            'child_uuid'    => $childUuid,
+        ];
+
+        try{
+            $aData = (new Query())->select([])->where($aWhere)->from(self::TABLE_NAME)->createCommand(self::getDB())->queryOne();
+        }catch(\Exception $e){
+            throw new SpException(SpErrorCodeConst::INSERT_DB_ERROR, 'select db error,message is:' . $e->getMessage(), "网络繁忙,请稍后再试");
+        }
+        return self::convertDbToBean($aData);
+    }
 }

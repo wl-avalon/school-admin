@@ -29,12 +29,19 @@ class BindChildToParentService
             ParentChildRelationModel::insertOneRecord($relationBean);
         }catch(\Exception $e){
             self::checkRelationRetry($childUuid, $relation);
+            self::checkParentUuidRetry($parentUuid, $childUuid);
         }
     }
 
     public static function checkRelationRetry($childUuid, $relation){
         $relationBean = ParentChildRelationModel::queryRelationByChildAndRelation($childUuid, $relation);
-        Assert::isTrue(empty($relationBean->getChildUuid()), "他已经被绑定过一位:" . ParentChildRelationBeanConst::$relationMap[$relation] . "了,若要重复绑定关系,请联系班主任");
+        Assert::isTrue(empty($relationBean->getChildUuid()), "请勿重复绑定,若要重复绑定关系,请联系班主任");
+        Assert::isTrue(!empty($relationBean->getChildUuid()), "网络繁忙,请稍后再试");
+    }
+
+    public static function checkParentUuidRetry($parentUuid, $childUuid){
+        $relationBean = ParentChildRelationModel::queryParentByChildAndRelation($parentUuid, $childUuid);
+        Assert::isTrue(empty($relationBean->getChildUuid()), "请勿重复绑定,若要重复绑定关系,请联系班主任");
         Assert::isTrue(!empty($relationBean->getChildUuid()), "网络繁忙,请稍后再试");
     }
 }

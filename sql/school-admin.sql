@@ -57,5 +57,5 @@ CREATE TABLE `parent_child_relation` (
   `update_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `idx_child_relation_uuid` (`child_uuid`, `relation`),
-  KEY `idx_child_uuid` (`child_uuid`)
+  UNIQUE KEY `idx_parent_child_uuid` (`parent_uuid`, `child_uuid`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8 COMMENT = '家长学生关系表';
