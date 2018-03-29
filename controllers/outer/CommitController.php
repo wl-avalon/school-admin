@@ -17,6 +17,7 @@ class CommitController extends Controller
             "addClass"          => 'app\modules\actions\outer\commit\AddClassAction',
             "addStudents"       => 'app\modules\actions\outer\commit\AddStudentsAction',
             "createParentCode"  => 'app\modules\actions\outer\commit\CreateParentCodeAction',
+            "bindChildToParent" => 'app\modules\actions\outer\commit\BindChildToParentAction',
         ];
     }
 }
