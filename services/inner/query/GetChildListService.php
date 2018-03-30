@@ -27,6 +27,7 @@ class GetChildListService
             $result[] = [
                 'childUuid' => $childInfoBean->getStudentUuid(),
                 'childName' => $childInfoBean->getStudentName(),
+                'classUUid' => $childInfoBean->getClassUuid(),
             ];
         }
         return ['childList' => $result];

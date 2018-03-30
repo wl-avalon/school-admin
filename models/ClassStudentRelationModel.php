@@ -104,4 +104,17 @@ class ClassStudentRelationModel
         }
         return self::convertDbToBeans($aData);
     }
+
+    public static function queryStudentByUuid($studentUuid){
+        $aWhere = [
+            'student_uuid'    => $studentUuid,
+        ];
+
+        try{
+            $aData = (new Query())->select([])->where($aWhere)->from(self::TABLE_NAME)->createCommand(self::getDB())->queryOne();
+        }catch(\Exception $e){
+            throw new SpException(SpErrorCodeConst::INSERT_DB_ERROR, 'select db error,message is:' . $e->getMessage(), "网络繁忙,请稍后再试");
+        }
+        return self::convertDbToBean($aData);
+    }
 }
