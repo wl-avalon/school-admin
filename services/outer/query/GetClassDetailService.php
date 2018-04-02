@@ -7,6 +7,7 @@
  */
 
 namespace app\modules\services\outer\query;
+use app\modules\constants\ClassRecordBeanConst;
 use app\modules\models\ClassRecordModel;
 use sp_framework\components\Assert;
 
@@ -17,7 +18,7 @@ class GetClassDetailService
         Assert::isTrue(!empty($classBean->getUuid()), "网络繁忙,请稍后再试", "班级不存在");
         return [
             'className'     => $classBean->getClassName(),
-            'classGrade'    => $classBean->getClassGrade(),
+            'classNowGrade' => ClassRecordBeanConst::$gradeMap[$classBean->getClassGrade()],
         ];
     }
 }
