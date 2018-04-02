@@ -17,8 +17,10 @@ class CreateParentCodeService
 {
     public static function createParentCode($classUuid){
         $redis          = RedisUtil::getInstance('redis');
-        $accessToken    = $redis->get(RedisKey::WEI_XIN_ACCESS_TOKEN);
-        $response       = WeiXinApi::createWxACode('page/mine/mine', $accessToken)->toArray();
-        return $response;
+        $accessToken    = $redis->get(RedisKey::WEI_XIN_PARENT_ACCESS_TOKEN);
+        $response       = WeiXinApi::createWxACode("pages/passport/register/register?classUuid={$classUuid}", $accessToken)->toArray();
+        header( "Content-type: image/jpeg");
+        echo $response;
+        exit;
     }
 }
