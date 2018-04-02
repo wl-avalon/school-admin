@@ -17,6 +17,7 @@ namespace app\modules\models\beans;
 class ClassTeacherRelationBean
 {
     private $id             = null; //BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '主键,自增ID'
+    private $uuid           = null; //VARCHAR(100) DEFAULT '' COMMENT '唯一ID',
     private $class_uuid     = null; //VARCHAR(100) DEFAULT '' COMMENT '班级ID'
     private $teacher_uuid   = null; //VARCHAR(100) DEFAULT '' COMMENT '教师ID'
     private $subject        = null; //TINYINT(4) DEFAULT 0 COMMENT '教师科目'
@@ -25,6 +26,7 @@ class ClassTeacherRelationBean
     
     public function __construct($input){
         $this->id               = $input['id']              ?? null;
+        $this->uuid             = $input['uuid']            ?? null;
         $this->class_uuid       = $input['class_uuid']      ?? null;
         $this->teacher_uuid     = $input['teacher_uuid']    ?? null;
         $this->subject          = $input['subject']         ?? null;
@@ -35,6 +37,7 @@ class ClassTeacherRelationBean
     public function toArray(){
         return [
             'id'            => $this->id,
+            'uuid'          => $this->uuid,
             'class_uuid'    => $this->class_uuid,
             'teacher_uuid'  => $this->teacher_uuid,
             'subject'       => $this->subject,
@@ -44,6 +47,7 @@ class ClassTeacherRelationBean
     }
     
     public function getID()             {return $this->id;}
+    public function getUuid()           {return $this->uuid;}
     public function getClassUuid()      {return $this->class_uuid;}
     public function getTeacherUuid()    {return $this->teacher_uuid;}
     public function getSubject()        {return $this->subject;}
@@ -51,6 +55,7 @@ class ClassTeacherRelationBean
     public function getUpdateTime()     {return $this->update_time;}
     
     public function setID($id)                      {$this->id              = $id;}
+    public function setUuid($uuid)                  {$this->uuid            = $uuid;}
     public function setClassUuid($class_uuid)       {$this->class_uuid      = $class_uuid;}
     public function setTeacherUuid($teacher_uuid)   {$this->teacher_uuid    = $teacher_uuid;}
     public function setSubject($subject)            {$this->subject         = $subject;}
