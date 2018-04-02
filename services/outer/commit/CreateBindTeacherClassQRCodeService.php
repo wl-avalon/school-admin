@@ -2,23 +2,22 @@
 /**
  * Created by PhpStorm.
  * User: wzj-dev
- * Date: 18/3/29
- * Time: 上午11:55
+ * Date: 18/4/2
+ * Time: 下午5:05
  */
 
 namespace app\modules\services\outer\commit;
-
-
 use app\modules\apis\WeiXinApi;
 use app\modules\constants\RedisKey;
 use sp_framework\util\RedisUtil;
 
-class CreateParentCodeService
+class CreateBindTeacherClassQRCodeService
 {
-    public static function createParentCode($classUuid){
+    public static function createBindTeacherClassQRCode($classUuid){
         $redis          = RedisUtil::getInstance('redis');
         $accessToken    = $redis->get(RedisKey::WEI_XIN_ACCESS_TOKEN);
-        $response       = WeiXinApi::createWxACode('page/mine/mine', $accessToken)->toArray();
-        return $response;
+        $response       = WeiXinApi::createWxACode("pages/mine/bindTeacher/bindTeacher?classUuid={$classUuid}", $accessToken)->toArray();
+        echo $response;
+        exit;
     }
 }
