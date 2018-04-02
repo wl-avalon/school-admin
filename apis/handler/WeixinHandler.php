@@ -25,7 +25,7 @@ class WeixinHandler extends DefaultHandler
         return $url;
     }
 
-    public function handleResponse(Response &$response, array $arrJson){
+    public function handleResponse(Response &$response, $arrJson){
         $decode = json_decode($arrJson, true);
         if(isset($decode['errcode'])){
             $response->setReturnCode($decode['errcode']);
