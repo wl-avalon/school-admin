@@ -95,7 +95,7 @@ class ClassRecordModel
         ];
 
         try{
-            $aData = (new Query())->select([])->where($aWhere)->from(self::TABLE_NAME)->createCommand(self::getDB())->queryOne();
+            $aData = (new Query())->select([])->where($aWhere)->from(self::TABLE_NAME)->createCommand(self::getDB())->queryAll();
         }catch(\Exception $e){
             throw new \Exception('select db error,message is:' . $e->getMessage(), "网络繁忙,请稍后再试");
         }
