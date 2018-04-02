@@ -15,7 +15,7 @@ class WeiXinApi
         $params = [
             'scene'         => $params,
             'page'          => $page,
-            'access_token'   => $accessToken,
+            'access_token'  => $accessToken,
         ];
         return ApiContext::get('weixin', 'createCodeUnLimit', $params);
     }

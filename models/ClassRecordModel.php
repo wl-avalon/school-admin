@@ -65,4 +65,22 @@ class ClassRecordModel
         }
         return self::convertDbToBeans($aData);
     }
+
+    /**
+     * @param $classUuid
+     * @return ClassRecordBean
+     * @throws \Exception
+     */
+    public static function queryOneRecordByUuid($classUuid){
+        $aWhere = [
+            'uuid'  => $classUuid,
+        ];
+
+        try{
+            $aData = (new Query())->select([])->where($aWhere)->from(self::TABLE_NAME)->createCommand(self::getDB())->queryOne();
+        }catch(\Exception $e){
+            throw new \Exception('select db error,message is:' . $e->getMessage(), "网络繁忙,请稍后再试");
+        }
+        return self::convertDbToBean($aData);
+    }
 }

@@ -16,7 +16,8 @@ class CreateBindTeacherClassQRCodeService
     public static function createBindTeacherClassQRCode($classUuid){
         $redis          = RedisUtil::getInstance('redis');
         $accessToken    = $redis->get(RedisKey::WEI_XIN_ACCESS_TOKEN);
-        $response       = WeiXinApi::createWxACode("pages/mine/bindTeacher/bindTeacher?classUuid={$classUuid}", $accessToken)->toArray();
+//        $response       = WeiXinApi::createWxACode("pages/mine/bindTeacher/bindTeacher?classUuid={$classUuid}", $accessToken)->toArray();
+        $response       = WeiXinApi::createCodeUnLimit("pages/mine/bindTeacher/bindTeacher", $classUuid, $accessToken)->toArray();
         header( "Content-type: image/jpeg");
         echo $response;
         exit;

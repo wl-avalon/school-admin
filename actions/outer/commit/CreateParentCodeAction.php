@@ -26,6 +26,6 @@ class CreateParentCodeAction extends BaseAction
 
     public function execute()
     {
-        return CreateParentCodeService::createParentCode($this->classUuid);
+        CreateParentCodeService::createParentCode($this->classUuid);
     }
 }

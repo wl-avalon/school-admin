@@ -16,6 +16,7 @@ class QueryController extends Controller
             'getMyAllClass'     => 'app\modules\actions\outer\query\GetMyAllClassAction',
             'getStudentOfClass' => 'app\modules\actions\outer\query\GetStudentOfClassAction',
             'getChildList'      => 'app\modules\actions\outer\query\GetChildListAction',
+            'getClassDetail'    => 'app\modules\actions\outer\query\GetClassDetailAction',
         ];
     }
 }
