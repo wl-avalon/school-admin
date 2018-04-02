@@ -12,6 +12,7 @@ namespace app\modules\models;
 use app\modules\models\beans\ClassTeacherRelationBean;
 use sp_framework\components\SpException;
 use sp_framework\constants\SpErrorCodeConst;
+use yii\db\Expression;
 use yii\db\Query;
 
 class ClassTeacherRelationModel
@@ -58,10 +59,10 @@ class ClassTeacherRelationModel
      * @param $teacherUuid
      * @param $classUuid
      * @param $subject
-     * @return ClassTeacherRelationBean
+     * @return array
      * @throws SpException
      */
-    public static function queryRelationByChildAndRelation($teacherUuid, $classUuid, $subject){
+    public static function queryRelationByTeacherAndClassAndSubject($teacherUuid, $classUuid, $subject){
         $aWhere = [
             'class_uuid'    => $classUuid,
             'teacher_uuid'  => $teacherUuid,
@@ -74,5 +75,19 @@ class ClassTeacherRelationModel
             throw new SpException(SpErrorCodeConst::INSERT_DB_ERROR, 'select db error,message is:' . $e->getMessage(), "网络繁忙,请稍后再试");
         }
         return self::convertDbToBean($aData);
+    }
+
+    public static function queryClassListByTeacher($teacherUuid){
+        $aWhere = [
+            'teacher_uuid'  => $teacherUuid,
+        ];
+
+        $field = ['class_uuid' => new Expression('DISTINCT(class_uuid)')];
+        try{
+            $aData = (new Query())->select($field)->where($aWhere)->from(self::TABLE_NAME)->createCommand(self::getDB())->queryAll();
+        }catch(\Exception $e){
+            throw new SpException(SpErrorCodeConst::INSERT_DB_ERROR, 'select db error,message is:' . $e->getMessage(), "网络繁忙,请稍后再试");
+        }
+        return $aData;
     }
 }

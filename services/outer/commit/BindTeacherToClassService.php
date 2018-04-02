@@ -35,7 +35,7 @@ class BindTeacherToClassService
     }
 
     public static function checkBindRetry($teacherUuid, $classUuid, $subject){
-        $relationBean = ClassTeacherRelationModel::queryRelationByChildAndRelation($teacherUuid, $classUuid, $subject);
+        $relationBean = ClassTeacherRelationModel::queryRelationByTeacherAndClassAndSubject($teacherUuid, $classUuid, $subject);
         Assert::isTrue(!empty($relationBean), "网络繁忙,请稍后再试");
     }
 }
