@@ -13,11 +13,12 @@ class CommitController extends Controller
 {
     public function actions(){
         return [
-            "addSchool"         => 'app\modules\actions\outer\commit\AddSchoolAction',
-            "addClass"          => 'app\modules\actions\outer\commit\AddClassAction',
-            "addStudents"       => 'app\modules\actions\outer\commit\AddStudentsAction',
-            "createParentCode"  => 'app\modules\actions\outer\commit\CreateParentCodeAction',
-            "bindChildToParent" => 'app\modules\actions\outer\commit\BindChildToParentAction',
+            "addSchool"             => 'app\modules\actions\outer\commit\AddSchoolAction',
+            "addClass"              => 'app\modules\actions\outer\commit\AddClassAction',
+            "addStudents"           => 'app\modules\actions\outer\commit\AddStudentsAction',
+            "createParentCode"      => 'app\modules\actions\outer\commit\CreateParentCodeAction',
+            "bindChildToParent"     => 'app\modules\actions\outer\commit\BindChildToParentAction',
+            "bindTeacherToClass"    => 'app\modules\actions\outer\commit\BindTeacherToClassAction',
         ];
     }
 }

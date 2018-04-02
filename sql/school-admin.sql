@@ -59,3 +59,17 @@ CREATE TABLE `parent_child_relation` (
   UNIQUE KEY `idx_child_relation_uuid` (`child_uuid`, `relation`),
   UNIQUE KEY `idx_parent_child_uuid` (`parent_uuid`, `child_uuid`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8 COMMENT = '家长学生关系表';
+
+CREATE TABLE `class_teacher_relation` (
+  `id` BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '主键,自增ID',
+  `uuid` VARCHAR(100) DEFAULT '' COMMENT '唯一ID',
+  `class_uuid` VARCHAR(100) DEFAULT '' COMMENT '班级ID',
+  `teacher_uuid` VARCHAR(100) DEFAULT '' COMMENT '教师ID',
+  `subject` TINYINT(4) DEFAULT 0 COMMENT '教师科目',
+  `create_time` TIMESTAMP DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
+  `update_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_uuid` (`uuid`),
+  UNIQUE KEY `idx_class_teacher_subject_uuid` (`class_uuid`, `teacher_uuid`, `subject`),
+  KEY `idx_teacher_uuid` (`teacher_uuid`)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8 COMMENT = '班级教师关系表';
