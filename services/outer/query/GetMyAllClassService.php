@@ -30,6 +30,7 @@ class GetMyAllClassService
         $bindClassRecordList    = ClassTeacherRelationModel::queryClassListByTeacher($memberID);
         $bindClassUuidList      = array_column($bindClassRecordList, 'class_uuid');
         $myBindClassList        = [];
+        $bindClassInfoList      = [];
         if(!empty($bindClassUuidList)){
             $bindClassInfoList      = ClassRecordModel::queryOneRecordByUuidList($bindClassUuidList);
             foreach($bindClassInfoList as $bindClassBean){
@@ -41,9 +42,26 @@ class GetMyAllClassService
             }
         }
 
+        $distinctClassList      = [];
+        foreach($classRecordList as $classRecordBean){
+            $distinctClassList[$classRecordBean->getUuid()] = [
+                'classUuid'     => $classRecordBean->getUuid(),
+                'classNowGrade' => ClassRecordBeanConst::$gradeMap[$classRecordBean->getClassGrade()],
+                'className'     => $classRecordBean->getClassName(),
+            ];
+        }
+        foreach($bindClassInfoList as $bindClassBean){
+            $distinctClassList[$bindClassBean->getUuid()] = [
+                'classUuid'     => $bindClassBean->getUuid(),
+                'classNowGrade' => ClassRecordBeanConst::$gradeMap[$bindClassBean->getClassGrade()],
+                'className'     => $bindClassBean->getClassName(),
+            ];
+        }
+
         return [
-            'classList'     => $myClassList,
-            'bindClassList' => $myBindClassList,
+            'classList'         => $myClassList,
+            'bindClassList'     => $myBindClassList,
+            'distinctClassList' => array_values($distinctClassList),
         ];
     }
 }
