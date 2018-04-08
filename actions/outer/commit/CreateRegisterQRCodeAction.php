@@ -7,6 +7,7 @@
  */
 
 namespace app\modules\actions\outer\commit;
+use app\modules\services\outer\commit\CreateRegisterQRCodeService;
 use sp_framework\actions\BaseAction;
 
 class CreateRegisterQRCodeAction extends BaseAction
@@ -18,6 +19,6 @@ class CreateRegisterQRCodeAction extends BaseAction
 
     public function execute()
     {
-        CreateBindTeacherClassQRCodeService::createBindTeacherClassQRCode($this->classUuid);
+        CreateRegisterQRCodeService::createRegisterQRCode();
     }
 }
