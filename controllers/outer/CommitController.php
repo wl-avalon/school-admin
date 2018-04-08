@@ -20,6 +20,7 @@ class CommitController extends Controller
             "createBindTeacherClassQRCode"  => 'app\modules\actions\outer\commit\CreateBindTeacherClassQRCodeAction',
             "bindChildToParent"             => 'app\modules\actions\outer\commit\BindChildToParentAction',
             "bindTeacherToClass"            => 'app\modules\actions\outer\commit\BindTeacherToClassAction',
+            "createRegisterQRCode"          => 'app\modules\actions\outer\commit\CreateRegisterQRCodeAction',
         ];
     }
 }
