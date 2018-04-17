@@ -101,4 +101,19 @@ class ClassRecordModel
         }
         return self::convertDbToBeans($aData);
     }
+
+    /**
+     * @param $page
+     * @param $pageSize
+     * @return ClassRecordBean[]
+     * @throws \Exception
+     */
+    public static function queryClassListCutPage($page, $pageSize){
+        try{
+            $aData = (new Query())->select([])->where([])->from(self::TABLE_NAME)->limit($page * $pageSize, $pageSize)->createCommand(self::getDB())->queryAll();
+        }catch(\Exception $e){
+            throw new \Exception('select db error,message is:' . $e->getMessage(), "网络繁忙,请稍后再试");
+        }
+        return self::convertDbToBeans($aData);
+    }
 }

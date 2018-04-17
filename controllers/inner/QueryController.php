@@ -17,6 +17,7 @@ class QueryController extends Controller
             'getStudentOfClass'         => 'app\modules\actions\inner\query\GetStudentOfClassAction',
             'getChildList'              => 'app\modules\actions\inner\query\GetChildListAction',
             'getStudentByStudentUuid'   => 'app\modules\actions\inner\query\GetStudentByStudentUuidAction',
+            'getClassList'              => 'app\modules\actions\inner\query\GetClassListAction',
         ];
     }
 }
