@@ -20,12 +20,9 @@ class AddClassService
         Assert::isTrue(!empty($idResponse['data']['nextId']), "网络繁忙,请稍后再试", "获取classUuid失败");
         $classUuid  = $idResponse['data']['nextId'];
 
-        $secondHalfYear     = time() > strtotime(date('Y-07-01'));
-        $classYearsOld      = ($nowGrade - ClassRecordBeanConst::GRADE_HIGH_SCHOOL_FIRST) ;
-        $classYearsOld      = $secondHalfYear ? $classYearsOld : $classYearsOld + 1;
-        $waitGraduateYears  = ClassRecordBeanConst::GRADE_HIGH_SCHOOL_THIRD - $nowGrade;
-        $waitGraduateYears  = $secondHalfYear ? $waitGraduateYears + 1 : $waitGraduateYears;
-
+        $year = self::getGradeYear($nowGrade);
+        $classYearsOld = $year['classYearsOld'];
+        $waitGraduateYears = $year['waitGraduateYears'];
         $classRecordBeanData = [
             'uuid'                  => $classUuid,
             'school_uuid'           => $schoolUuid,
@@ -40,5 +37,27 @@ class AddClassService
         $classRecordBean = new ClassRecordBean($classRecordBeanData);
         ClassRecordModel::insertOneRecord($classRecordBean);
         return [];
+    }
+
+    public static function getGradeYear($nowGrade){
+        $classYearsOld      = 0;
+        $waitGraduateYears  = 0;
+        if(in_array($nowGrade, [15, 16, 17])){
+            $secondHalfYear     = time() > strtotime(date('Y-07-01'));
+            $classYearsOld      = ($nowGrade - ClassRecordBeanConst::GRADE_HIGH_SCHOOL_FIRST) ;
+            $classYearsOld      = $secondHalfYear ? $classYearsOld : $classYearsOld + 1;
+            $waitGraduateYears  = ClassRecordBeanConst::GRADE_HIGH_SCHOOL_THIRD - $nowGrade;
+            $waitGraduateYears  = $secondHalfYear ? $waitGraduateYears + 1 : $waitGraduateYears;
+        }elseif(in_array($nowGrade, [4,5,6,7,8,9,10])){
+            $secondHalfYear     = time() > strtotime(date('Y-07-01'));
+            $classYearsOld      = ($nowGrade - ClassRecordBeanConst::GRADE_PRIMARY_SCHOOL_FIRST) ;
+            $classYearsOld      = $secondHalfYear ? $classYearsOld : $classYearsOld + 1;
+            $waitGraduateYears  = ClassRecordBeanConst::GRADE_PRIMARY_SCHOOL_SEVENTH - $nowGrade;
+            $waitGraduateYears  = $secondHalfYear ? $waitGraduateYears + 1 : $waitGraduateYears;
+        }
+        return [
+            'classYearsOld'     => $classYearsOld,
+            'waitGraduateYears' => $waitGraduateYears,
+        ];
     }
 }
