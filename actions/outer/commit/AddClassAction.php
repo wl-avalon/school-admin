@@ -27,7 +27,7 @@ class AddClassAction extends BaseAction
         Assert::isTrue(!empty($this->schoolUuid), "学校ID不能为空");
         Assert::isTrue(!empty($this->className), "班级名称不能为空");
         Assert::isTrue(!empty($this->nowGrade), "班级当前年级不能为空");
-        Assert::isTrue(in_array($this->nowGrade, [15,16,17]), "暂不支持该年级");
+//        Assert::isTrue(in_array($this->nowGrade, [4,5,6,7,8,9,10,15,16,17]), "暂不支持该年级");
     }
 
     public function execute()
